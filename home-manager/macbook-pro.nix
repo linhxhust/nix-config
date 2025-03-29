@@ -66,6 +66,7 @@
       docker
       kubectl
       kubernetes-helm
+      python3
     ];
 
   fonts.fontconfig.enable = true;
