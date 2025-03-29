@@ -62,6 +62,8 @@
       awscli2
       terraform
       golangci-lint
+      colima
+      docker
     ];
 
   fonts.fontconfig.enable = true;

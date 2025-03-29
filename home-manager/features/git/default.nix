@@ -4,7 +4,7 @@
     programs.git = {
       enable = true;
       userName = "Linh Nguyen";
-      userEmail = "linhxhust@gmail.com";
+      userEmail = "linhx.hust@gmail.com";
       aliases = {
         ci = "checkin";
         st = "status";
