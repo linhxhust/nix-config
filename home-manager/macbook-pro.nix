@@ -66,7 +66,7 @@
       docker
       kubectl
       kubernetes-helm
-      python3
+      tflint
     ];
 
   fonts.fontconfig.enable = true;
