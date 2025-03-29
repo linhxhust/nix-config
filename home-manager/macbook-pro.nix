@@ -65,6 +65,7 @@
       colima
       docker
       kubectl
+      kubernetes-helm
     ];
 
   fonts.fontconfig.enable = true;
