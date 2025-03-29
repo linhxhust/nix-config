@@ -85,6 +85,13 @@
       plugins = [ "git" "sudo" "fasd" "fzf" "direnv" ];
     };
 
+    initExtra = ''
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;5D" backward-word
+
+      eval "$(zoxide init zsh)"
+    '';
+
     shellAliases = {
       ll = "ls -l";
       tls = "tmux list-sessions";
@@ -96,7 +103,8 @@
       kd = "kubectl describe";
       kcu = "kubectl config use-context";
       uuidgen = "uuidgen | tr A-F a-f";
-
+      ls = "eza --icons=always";
+      cd = "z";
     };
     syntaxHighlighting.enable = true;
     history = { size = 1000000; };

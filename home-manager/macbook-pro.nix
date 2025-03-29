@@ -67,6 +67,8 @@
       kubectl
       kubernetes-helm
       tflint
+      zoxide
+      eza
     ];
 
   fonts.fontconfig.enable = true;
