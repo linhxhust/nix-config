@@ -27,6 +27,12 @@
       tnew = "tmux new-session -s";
       ta = "tmux attach-session -t";
       tkill = "tmux kill-session -t";
+      k = "kubectl";
+      kl = "kubectl logs -f";
+      kd = "kubectl describe";
+      kcu = "kubectl config use-context";
+      uuidgen = "uuidgen | tr A-F a-f";
+
     };
     syntaxHighlighting.enable = true;
     history = { size = 1000000; };

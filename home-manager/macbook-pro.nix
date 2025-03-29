@@ -64,6 +64,7 @@
       golangci-lint
       colima
       docker
+      kubectl
     ];
 
   fonts.fontconfig.enable = true;
