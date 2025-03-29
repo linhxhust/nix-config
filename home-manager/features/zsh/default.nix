@@ -53,7 +53,7 @@
         repo_root_format = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) ";
         style = "cyan bg:0xDA627D";
         truncate_to_repo = true;
-        truncation_length = 2;
+        truncation_length = 0;
         truncation_symbol = "…/";
         use_logical_path = true;
         use_os_path_sep = true;
