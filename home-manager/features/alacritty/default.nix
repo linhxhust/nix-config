@@ -45,7 +45,7 @@ in {
               key = "Right";
               mods = "Alt";
               chars = "\u001BF";
-          },
+          }
           {
               key = "Left";
               mods = "Alt";
