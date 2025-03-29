@@ -61,7 +61,7 @@
       kubernetes = {
         disabled = false;
         format = "[$symbol$context]($style) ";
-        style = "red dimmed";
+        style = "yellow dimmed";
         symbol = "⛵";
       };
       aws = {
