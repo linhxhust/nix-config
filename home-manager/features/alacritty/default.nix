@@ -40,6 +40,18 @@ in {
           size = config.userConf.terminalFontSize;
         };
         colors = { draw_bold_text_with_bright_colors = true; };
+        keyboard.bindings = [
+          {
+              key = "Right";
+              mods = "Alt";
+              chars = "\u001BF";
+          },
+          {
+              key = "Left";
+              mods = "Alt";
+              chars = "\u001BB";
+          }
+        ];
       };
     };
     programs.kitty.enable = true;
