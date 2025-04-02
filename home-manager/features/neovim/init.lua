@@ -113,11 +113,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('i', 'qq', '<Esc>', {
   desc = 'Exit insert mode'
 })
-vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', {
-  desc = 'Close current buffer'
-})
 vim.keymap.set('n', '<leader>fs', '<cmd>wa<CR>', {
   desc = '[F]ile save current buffer'
+})
+vim.keymap.set('n', '<leader>fq', '<cmd>wq<CR>', {
+  desc = '[F]ile [Q]uit and save'
 })
 vim.keymap.set('n', '<C-g>', ':', {
   desc = '[G]o to line'
@@ -131,9 +131,8 @@ vim.keymap.set('n', '<leader>]', '<cmd>bn<CR>', {
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', {
   desc = '[B]uffer [D]elete'
 })
-
-vim.keymap.set('n', '<leader>st', '<cmd>Telescope colorscheme<CR>', {
-  desc = '[S]elect [T]heme'
+vim.keymap.set('n', '<leader>ts', '<cmd>Telescope colorscheme<CR>', {
+  desc = '[T]heme [S]elect'
 })
 
 -- [[ Basic Autocommands ]]
@@ -607,6 +606,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
+        terraformls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -768,9 +768,9 @@ require('lazy').setup({
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          -- ['<C-n>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          -- ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -779,13 +779,13 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
