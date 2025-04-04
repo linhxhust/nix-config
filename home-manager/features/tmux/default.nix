@@ -122,8 +122,10 @@
         bind t split-window -p 25
 
         # quickly switch panes
-        unbind ^J
-        bind ^J select-pane -t :.+
+        bind k selectp -U # switch to panel Up
+        bind j selectp -D # switch to panel Down 
+        bind h selectp -L # switch to panel Left
+        bind l selectp -R # switch to panel Right
 
         # force a reload of the config file
         unbind r
