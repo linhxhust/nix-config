@@ -69,6 +69,7 @@
       tflint
       zoxide
       eza
+      krew
     ];
 
   fonts.fontconfig.enable = true;
