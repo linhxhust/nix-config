@@ -70,6 +70,7 @@
       zoxide
       eza
       krew
+      telnet
     ];
 
   fonts.fontconfig.enable = true;

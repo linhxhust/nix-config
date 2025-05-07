@@ -78,8 +78,10 @@
   programs.zsh = {
     enable = true;
     envExtra = ''
-      export PATH="$HOME/.krew/bin:$PATH"
       . ${pkgs.nix}/etc/profile.d/nix-daemon.sh
+    '';
+    profileExtra = ''
+      export PATH="$HOME/.krew/bin:$PATH"
     '';
     oh-my-zsh = {
       enable = true;
