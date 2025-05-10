@@ -956,6 +956,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.comment',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
