@@ -56,6 +56,7 @@
       nerd-fonts.iosevka
 
       docker-client
+      hadolint
       nushell
       lima
       uv
