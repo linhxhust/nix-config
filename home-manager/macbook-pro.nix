@@ -72,6 +72,7 @@
       eza
       krew
       inetutils
+      neovide
     ];
 
   fonts.fontconfig.enable = true;
