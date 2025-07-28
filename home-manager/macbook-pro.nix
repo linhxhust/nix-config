@@ -72,7 +72,7 @@
       eza
       krew
       inetutils
-      neovide
+      pwgen
     ];
 
   fonts.fontconfig.enable = true;
