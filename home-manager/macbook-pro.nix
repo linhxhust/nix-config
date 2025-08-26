@@ -62,6 +62,7 @@
       uv
       awscli2
       terraform
+      terraform-ls
       golangci-lint
       colima
       docker
