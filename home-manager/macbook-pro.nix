@@ -74,6 +74,8 @@
       krew
       inetutils
       pwgen
+      tcptraceroute
+      ansible
     ];
 
   fonts.fontconfig.enable = true;
