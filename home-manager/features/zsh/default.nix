@@ -82,6 +82,7 @@
     '';
     profileExtra = ''
       export PATH="$HOME/.krew/bin:$PATH"
+      export PATH=~/.npm-global/bin:$PATH
     '';
     oh-my-zsh = {
       enable = true;
