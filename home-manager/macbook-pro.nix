@@ -76,6 +76,9 @@
       pwgen
       tcptraceroute
       ansible
+      nodejs
+      nodePackages.typescript
+      nodePackages.eslint
     ];
 
   fonts.fontconfig.enable = true;
