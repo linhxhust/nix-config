@@ -3,7 +3,9 @@
   config = {
     programs.go = {
       enable = true;
-      goPath = "/Users/linhnguyen/Tools";
+      env = {
+       GOPATH = "/Users/linhnguyen/Tools";
+      };
     };
   };
 }

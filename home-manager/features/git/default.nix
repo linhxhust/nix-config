@@ -3,18 +3,9 @@
   config = {
     programs.git = {
       enable = true;
-      userName = "Linh Nguyen";
-      userEmail = "linhx.hust@gmail.com";
-      aliases = {
-        ci = "checkin";
-        st = "status";
-        br = "branch";
-        co = "checkout";
-        df = "diff";
-        cm = "commit";
-        cp = "cherry-pick";
-      };
-      extraConfig = {
+      settings = {
+        user.name = "Linh Nguyen";
+        user.email = "linhx.hust@gmail.com";
         user.signingKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+DChIVCZ5wWSbz9/3Pi53TMOfUGYF3AkBegkP2GR+n";
         gpg = {
@@ -34,6 +25,15 @@
           renames = true;
         };
         merge.conflictstyle = "diff3";
+        aliases = {
+          ci = "checkin";
+          st = "status";
+          br = "branch";
+          co = "checkout";
+          df = "diff";
+          cm = "commit";
+          cp = "cherry-pick";
+        };
       };
       includes = let incConf = config.userConf.gitFolderConfigs;
       in builtins.map (ifPath: {
