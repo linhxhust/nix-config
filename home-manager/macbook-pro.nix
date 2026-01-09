@@ -79,6 +79,7 @@
       pkgs.nodejs_24
       pkgs.nodePackages.typescript
       pkgs.nodePackages.eslint
+      claude-code
     ];
 
   fonts.fontconfig.enable = true;

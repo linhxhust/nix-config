@@ -99,7 +99,7 @@
             nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            catppuccin.homeManagerModules.catppuccin
+            catppuccin.homeModules.catppuccin
             homeManagerModules.darwin-trampoline-apps
             # > Our main home-manager configuration file <
             ./home-manager/macbook-pro.nix
