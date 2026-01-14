@@ -80,6 +80,7 @@
       pkgs.nodePackages.typescript
       pkgs.nodePackages.eslint
       claude-code
+      vscode
     ];
 
   fonts.fontconfig.enable = true;
