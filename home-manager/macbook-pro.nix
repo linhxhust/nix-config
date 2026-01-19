@@ -81,6 +81,7 @@
       pkgs.nodePackages.eslint
       claude-code
       vscode
+      ngrok
     ];
 
   fonts.fontconfig.enable = true;
