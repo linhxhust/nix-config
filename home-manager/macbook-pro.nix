@@ -81,7 +81,6 @@
       pkgs.nodePackages.eslint
       claude-code
       vscode
-      zed-editor
     ];
 
   fonts.fontconfig.enable = true;
