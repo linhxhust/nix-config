@@ -81,6 +81,7 @@
       pkgs.nodePackages.eslint
       claude-code
       vscode
+      markdownlint-cli
     ];
 
   fonts.fontconfig.enable = true;
