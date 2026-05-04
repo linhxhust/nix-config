@@ -82,6 +82,7 @@
       claude-code
       vscode
       markdownlint-cli
+      azure-cli
     ];
 
   fonts.fontconfig.enable = true;
