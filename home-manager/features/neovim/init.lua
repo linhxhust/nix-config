@@ -18,6 +18,9 @@ vim.opt.number = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
 
+-- Disable Swapfiles Entirely
+vim.opt.swapfile = false
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -71,6 +74,17 @@ vim.opt.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.opt.confirm = true
+
+-- Temporarily disabling semantic tokens
+-- https://github.com/neovim/neovim/issues/36257
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.server_capabilities then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  end,
+})
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
