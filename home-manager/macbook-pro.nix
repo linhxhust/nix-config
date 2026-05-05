@@ -76,9 +76,6 @@
       pwgen
       tcptraceroute
       ansible
-      pkgs.nodejs_24
-      pkgs.nodePackages.typescript
-      pkgs.nodePackages.eslint
       claude-code
       vscode
       markdownlint-cli

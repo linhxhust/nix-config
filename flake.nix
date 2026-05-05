@@ -67,7 +67,12 @@
         "x86_64-darwin"
       ];
     in rec {
-      apps = forAllSystems (system: inputs.nixinate.nixinate.${system} self);
+      # apps = forAllSystems (system: inputs.nixinate.nixinate.${system} self);
+      apps = forAllSystems (system: 
+        if (self ? nixosConfigurations) 
+        then inputs.nixinate.nixinate.${system} self 
+        else {}
+      );
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
