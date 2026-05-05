@@ -77,13 +77,13 @@ vim.opt.confirm = true
 
 -- Temporarily disabling semantic tokens
 -- https://github.com/neovim/neovim/issues/36257
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  end,
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client.server_capabilities then
+			client.server_capabilities.semanticTokensProvider = nil
+		end
+	end,
 })
 
 -- [[ Basic Keymaps ]]
@@ -1005,6 +1005,7 @@ require("lazy").setup({
 	require("kickstart.plugins.neo-tree"),
 	require("kickstart.plugins.gitsigns"),
 	require("kickstart.plugins.comment"),
+	require("kickstart.plugins.lazygit")
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the

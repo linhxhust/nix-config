@@ -50,6 +50,7 @@
       vscode
       markdownlint-cli
       azure-cli
+      lazygit
     ];
   };
 
