@@ -8,9 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, catppuccin, ... }:
     let
       system = "aarch64-darwin";
       homeManagerModules = import ./modules/home-manager;
@@ -20,6 +21,10 @@
       homeConfigurations."linhnguyen@mac-m4" =
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+
           modules = [
             catppuccin.homeModules.catppuccin
             homeManagerModules.darwin-trampoline-apps

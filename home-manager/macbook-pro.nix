@@ -27,13 +27,13 @@
       nerd-fonts.iosevka
       docker-client
       hadolint
-      nushell
       lima
       uv
       awscli2
       terraform
       terraform-ls
       golangci-lint
+      gopls
       colima
       docker
       kubectl
@@ -46,11 +46,8 @@
       pwgen
       tcptraceroute
       ansible
-      claude-code
-      vscode
       markdownlint-cli
       azure-cli
-      lazygit
       helix
     ];
   };

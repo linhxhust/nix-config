@@ -2,6 +2,36 @@ local _, nixCats_extra = pcall(function() return require('nixCats').extra end)
 local function setup_lsp_rust()
 end
 
+local function setup_lsp_terraform()
+  local cmd
+
+  if vim.fn.executable('terraform-ls') == 1 then
+    cmd = 'terraform-ls'
+  elseif vim.fn.getenv('HOME') ~= vim.NIL then
+    cmd = vim.fn.expand('$HOME/.nix-profile/bin/terraform-ls')
+  end
+
+  vim.lsp.config('terraform-ls', {
+    cmd = { cmd, "serve" },
+    filetypes = { "terraform", "tf", "terraform-vars", "tfvars" },
+    root_markers = {
+      '.terraform',
+      '.git',
+      '*.tf',
+    },
+    settings = {
+      terraform = {
+        experimentalFeatures = {
+          prefillRequiredFields = true,
+          validateOnSave = true,
+        },
+      },
+    },
+  })
+
+  vim.lsp.enable('terraform-ls')
+end
+
 local function setup_lsp_go()
   local cmd
   if vim.fn.executable('gopls') then
@@ -47,6 +77,8 @@ local function setup_lsp()
   setup_lsp_go()
   setup_lsp_lua()
   setup_lsp_nix()
+  setup_lsp_terraform()
+  
   vim.lsp.enable('ts_ls')
 end
 
