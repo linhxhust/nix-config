@@ -20,16 +20,6 @@ end
 
 local function terraform_definition_handler(err, result, ctx, config)
   if err and err.code == -32098 and err.message == 'no reference origin found' then
-    local client = ctx and ctx.client_id and vim.lsp.get_client_by_id(ctx.client_id)
-    local client_name = client and client.name or 'terraform-ls'
-
-    vim.schedule(function()
-      vim.notify(
-        ('[%s] Definition not found. Run `terraform init` in project root and retry.'):format(client_name),
-        vim.log.levels.INFO
-      )
-    end)
-
     return
   end
 
@@ -44,21 +34,14 @@ local function setup_lsp_terraform()
 
   vim.lsp.config('terraform-ls', {
     cmd = { cmd, 'serve' },
-    filetypes = { 'terraform', 'terraform-vars' },
-    root_dir = function(bufnr, on_dir)
-      local bufname = vim.api.nvim_buf_get_name(bufnr)
-      local root = vim.fs.root(bufname, { '.terraform', '.terraform.lock.hcl' })
-        or vim.fs.root(bufname, { '.git' })
-
-      on_dir(root or vim.fs.dirname(bufname))
-    end,
+    filetypes = { 'terraform', 'tf', 'terraform-vars', 'tfvars' },
+    root_markers = {
+      '.terraform',
+      '.git',
+      '.terraform.lock.hcl',
+    },
     handlers = {
       ['textDocument/definition'] = terraform_definition_handler,
-    },
-    init_options = {
-      terraform = {
-        logFilePath = '/dev/null',
-      },
     },
     settings = {
       terraform = {
