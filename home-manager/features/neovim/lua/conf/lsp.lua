@@ -43,11 +43,6 @@ local function setup_lsp_terraform()
     handlers = {
       ['textDocument/definition'] = terraform_definition_handler,
     },
-    init_options = {
-      terraform = {
-        logFilePath = '/dev/null',
-      },
-    },
     settings = {
       terraform = {
         experimentalFeatures = {
