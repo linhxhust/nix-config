@@ -51,7 +51,7 @@ local function setup_mappings()
     { "<leader>g", group = "Git" },
     { "<leader>l", group = "Lsp" },
     { "<leader>lr", group = "Rust Tools" },
-    { "<leader>p", group = "Project Navigation" },
+    { "<leader>s", group = "Search & Navigation" },
     { "<leader>t", group = "Treesitter" },
     { "<leader>f", group = "Files/Formatting" },
   }
@@ -89,8 +89,8 @@ local function setup_mappings()
 
       -- diagnostics related
       ['<leader>dl'] = { vim.diagnostic.setloclist, 'loclist of diagnostics' },
-      ['<leader>dt'] = { Snacks.picker.diagnostics_buffer, 'current file diagnostics' },
-      ['<leader>dT'] = { Snacks.picker.diagnostics, 'project diagnostics' },
+      ['<leader>df'] = { Snacks.picker.diagnostics_buffer, 'current file diagnostics' },
+      ['<leader>dp'] = { Snacks.picker.diagnostics, 'project diagnostics' },
       ['<leader>dd'] = { function()
         local new_config = not vim.diagnostic.config().virtual_lines
         vim.diagnostic.config({ virtual_lines = new_config })
@@ -99,14 +99,14 @@ local function setup_mappings()
       ['[['] = { require'trouble'.prev, 'go to prev diagnostics' },
 
       -- project navigation
-      ['<leader>pf'] = { Snacks.picker.files, 'find files' },
-      ['<leader>pg'] = { Snacks.picker.git_files, 'find git fiels' },
-      ['<leader>pb'] = { Snacks.picker.buffers, 'find buffers' },
-      ['<leader>pa'] = { Snacks.picker.grep, 'Search from input' },
-      ['<leader>ps'] = { Snacks.picker.grep_word, 'Search current word' },
+      ['<leader>sf'] = { Snacks.picker.files, 'find files' },
+      ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
+      ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
+      ['<leader>ss'] = { Snacks.picker.grep, 'Search from input' },
+      ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
       ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
-      ['<leader>fo'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
+      ['<leader>ft'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
 
       -- buffer navigation
       ['<leader>]'] = { ':bn<cr>', 'next buffer' },
@@ -133,13 +133,14 @@ local function setup_mappings()
     },
     v = {
       ['<leader>.'] = { '<esc><cmd>lua vim.lsp.buf.range_code_action()<CR>', 'code range actions' },
-      ['<leader>ps'] = { Snacks.picker.grep_word, 'Search current word' },
+      ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
     },
     i = {
       ['<c-x><c-f>'] = {
         function() require'blink.cmp'.show({ providers = {'path'} }) end,
         'complete file path',
       },
+      ['qq'] = {'<esc>', 'normal model'},
       ['<c-x><c-l>'] = {
         function()
           local bl = require'blink.cmp'
