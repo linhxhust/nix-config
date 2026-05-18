@@ -119,7 +119,6 @@ local function setup_mappings()
       ['<leader><space>'] = { '<cmd>StripWhitespace<cr>', 'remove trailing whitespace' },
       ['<c-l>'] = { '<cmd>nohl<cr><c-l>', 'refersh no highlight search' },
       ['<cr>'] = { 'za', 'fold toggle current' },
-
       -- treesitter related
       ['<leader>t<space>'] = { require'treesj'.toggle, 'treesitter - toggle split join' },
     },
