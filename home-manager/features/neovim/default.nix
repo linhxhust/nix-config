@@ -11,6 +11,8 @@ let
         lua-language-server
         nil
         fd
+        terraform-ls
+        terraform
       ];
     };
 
