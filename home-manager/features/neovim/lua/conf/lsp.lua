@@ -34,7 +34,7 @@ local function setup_lsp_terraform()
 
   vim.lsp.config('terraform-ls', {
     cmd = { cmd, 'serve' },
-    filetypes = { 'terraform', 'tf', 'terraform-vars', 'tfvars' },
+    filetypes = { 'terraform', 'tf'},
     root_markers = {
       '.terraform',
       '.git',
