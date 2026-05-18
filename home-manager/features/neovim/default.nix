@@ -10,6 +10,7 @@ let
         typescript-language-server
         lua-language-server
         nil
+        nixd
         fd
         terraform-ls
         terraform
