@@ -43,6 +43,7 @@ let
           p.tree-sitter-javascript
           p.tree-sitter-typescript
           p.tree-sitter-tsx
+          p.tree-sitter-hcl
         ]))
         nvim-treesitter-textobjects
 
@@ -52,8 +53,6 @@ let
         crates-nvim
         treesj
 
-        nvim-dap
-        nvim-dap-ui
         nvim-nio
 
         trouble-nvim

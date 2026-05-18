@@ -109,18 +109,10 @@ local function setup_mappings()
       ['<leader>ft'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
 
       -- buffer navigation
-      ['<leader>]'] = { ':bn<cr>', 'next buffer' },
-      ['<leader>['] = { ':bp<cr>', 'prev buffer' },
+      ['<leader>bn'] = { ':bn<cr>', 'next buffer' },
+      ['<leader>bp'] = { ':bp<cr>', 'prev buffer' },
+      ['<leader>bq'] = { ':bd<cr>', 'close current buffer' },
       ['<leader><tab>'] = { ':b#<cr>', 'last buffer' },
-
-      -- dap debugger
-      ['<leader>bs'] = { require'dap'.toggle_breakpoint, 'set breakpoint' },
-      ['<leader>bc'] = { require'dap'.continue, 'continue' },
-      ['<leader>bi'] = { require'dap'.step_into, 'step Into' },
-      ['<leader>bo'] = { require'dap'.step_over, 'step Over' },
-      ['<leader>bt'] = { require'dap'.terminate, 'Terminate request' },
-      ['<leader>bd'] = { require'dap'.disconnect, 'Disconnect from dap server' },
-      ['<leader>bu'] = { require'dapui'.toggle, 'toggle dap UI' },
 
       -- misc
       ['<leader>n'] = { Snacks.rename.rename_file, 'rename current file' },
