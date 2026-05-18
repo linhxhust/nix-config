@@ -34,11 +34,13 @@ local function setup_lsp_terraform()
 
   vim.lsp.config('terraform-ls', {
     cmd = { cmd, 'serve' },
-    filetypes = { 'terraform', 'tf'},
+    filetypes = { 'terraform', 'tf' },
     root_markers = {
-      '.terraform',
-      '.git',
       '.terraform.lock.hcl',
+      '.terraform',
+      'versions.tf',
+      'providers.tf',
+      'main.tf',
     },
     handlers = {
       ['textDocument/definition'] = terraform_definition_handler,
