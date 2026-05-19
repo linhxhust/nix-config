@@ -74,7 +74,6 @@ local function setup_mappings()
       -- lsp specific
       ['<leader>ld'] = { vim.diagnostic.open_float, 'show diagnostic in float' },
       ['<leader>ls'] = { Snacks.picker.lsp_symbols, 'document symbols' },
-      ['<leader>lS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
       ['<leader>lf'] = { vim.lsp.buf.format, 'code formatting' },
       ['<leader>ln'] = { vim.lsp.buf.rename, 'rename' },
       ['<leader>li'] = { inlay_toggle, 'toggle inlay hints' },
@@ -102,11 +101,13 @@ local function setup_mappings()
       ['<leader>sf'] = { Snacks.picker.files, 'find files' },
       ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
       ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
-      ['<leader>ss'] = { Snacks.picker.grep, 'Search from input' },
+      ['<leader>/'] = { Snacks.picker.grep, 'Search from input' },
+      ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols'},
+      ['<leader>sS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
       ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
       ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
-      ['<leader>ft'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
+      ['\\'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
 
       -- buffer navigation
       ['<leader>bn'] = { ':bn<cr>', 'next buffer' },
