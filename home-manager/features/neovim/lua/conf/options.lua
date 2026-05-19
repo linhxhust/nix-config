@@ -25,6 +25,7 @@ local function setup()
     extends = "⟩",
     precedes = "⟨"
   }
+  vim.opt.splitright = true
 
   opt.foldmethod = "indent"
   opt.foldnestmax = 10

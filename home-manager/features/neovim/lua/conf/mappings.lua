@@ -100,11 +100,11 @@ local function setup_mappings()
       -- project navigation
       ['<leader>sf'] = { Snacks.picker.files, 'find files' },
       ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
-      ['<leader>,'] = { Snacks.picker.buffers, 'find buffers' },
-      ['<leader>/'] = { Snacks.picker.grep({ dirs = { vim.api.nvim_buf_get_name(0) } }), 'Search in current file' },
+      ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
       ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols'},
       ['<leader>sS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
-      ['<leader>sb'] = { Snacks.picker.lines, 'buffer lines'},
+      ['<leader>sa'] = { Snacks.picker.grep, 'Grep'},
+      ['<leader>sl'] = { Snacks.picker.lines, 'buffer lines'},
       ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
       ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
@@ -113,8 +113,10 @@ local function setup_mappings()
       -- buffer navigation
       ['<leader>bn'] = { ':bn<cr>', 'next buffer' },
       ['<leader>bp'] = { ':bp<cr>', 'prev buffer' },
-      ['<leader>bq'] = { ':bd<cr>', 'close current buffer' },
+      ['<leader>bd'] = { ':bd<cr>', 'close current buffer' },
       ['<leader><tab>'] = { ':b#<cr>', 'last buffer' },
+      -- save buffer
+      ['<leader>fs'] = { ':w<cr>', 'save current buffer' },
 
       -- misc
       ['<leader>n'] = { Snacks.rename.rename_file, 'rename current file' },
