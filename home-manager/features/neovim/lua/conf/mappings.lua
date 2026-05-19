@@ -100,10 +100,11 @@ local function setup_mappings()
       -- project navigation
       ['<leader>sf'] = { Snacks.picker.files, 'find files' },
       ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
-      ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
-      ['<leader>/'] = { Snacks.picker.grep, 'Search from input' },
+      ['<leader>,'] = { Snacks.picker.buffers, 'find buffers' },
+      ['<leader>/'] = { Snacks.picker.grep({ dirs = { vim.api.nvim_buf_get_name(0) } }), 'Search in current file' },
       ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols'},
       ['<leader>sS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
+      ['<leader>sb'] = { Snacks.picker.lines, 'buffer lines'},
       ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
       ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
