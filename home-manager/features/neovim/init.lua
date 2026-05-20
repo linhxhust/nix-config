@@ -113,7 +113,13 @@ local function bootstrap()
       },
       layout = {
         preset = 'ivy',
-      }
+      },
+      sources = {
+        explorer = {
+          hidden = true,
+          ignored = false
+        },
+      },
     },
     indent = {},
     input = {},
