@@ -31,9 +31,12 @@ local function install_autocmd_mappings(autocmd_mappings)
     local autocmd_s = vim.split(autocmd, "/", { plain = true })
     local event = autocmd_s[1]
     local pattern = autocmd_s[2] or error(string.format("autocmd is not valid: %s", autocmd))
-    vim.api.nvim_create_autocmd(event, { pattern = pattern, callback = function()
-      install_mappings(mappings)
-    end })
+    vim.api.nvim_create_autocmd(event, {
+      pattern = pattern,
+      callback = function()
+        install_mappings(mappings)
+      end
+    })
   end
 end
 
@@ -45,18 +48,18 @@ end
 local function setup_mappings()
   vim.o.timeoutlen = 300
   local folders = {
-    { "<leader>a", group = "Aider/AI" },
-    { "<leader>b", group = "Dap DeBbuger" },
-    { "<leader>d", group = "Diagnostics" },
-    { "<leader>g", group = "Git" },
-    { "<leader>l", group = "Lsp" },
+    { "<leader>a",  group = "Aider/AI" },
+    { "<leader>b",  group = "Dap DeBbuger" },
+    { "<leader>d",  group = "Diagnostics" },
+    { "<leader>g",  group = "Git" },
+    { "<leader>l",  group = "Lsp" },
     { "<leader>lr", group = "Rust Tools" },
-    { "<leader>s", group = "Search & Navigation" },
-    { "<leader>t", group = "Treesitter" },
-    { "<leader>f", group = "Files/Formatting" },
+    { "<leader>s",  group = "Search & Navigation" },
+    { "<leader>t",  group = "Treesitter" },
+    { "<leader>f",  group = "Files/Formatting" },
   }
   local wk = require 'which-key'
-  wk.setup{}
+  wk.setup {}
   wk.add(folders)
   local mappings = {
     n = {
@@ -94,17 +97,17 @@ local function setup_mappings()
         local new_config = not vim.diagnostic.config().virtual_lines
         vim.diagnostic.config({ virtual_lines = new_config })
       end, 'toggle hide virtual text diagnostic' },
-      [']]'] = { require'trouble'.next, 'go to next diagnostics' },
-      ['[['] = { require'trouble'.prev, 'go to prev diagnostics' },
+      [']]'] = { require 'trouble'.next, 'go to next diagnostics' },
+      ['[['] = { require 'trouble'.prev, 'go to prev diagnostics' },
 
       -- project navigation
       ['<leader>sf'] = { Snacks.picker.files, 'find files' },
       ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
-      ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
-      ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols'},
+      ['<leader><space>'] = { Snacks.picker.buffers, 'find buffers' },
+      ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols' },
       ['<leader>sS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
-      ['<leader>sa'] = { Snacks.picker.grep, 'Grep'},
-      ['<leader>sl'] = { Snacks.picker.lines, 'buffer lines'},
+      ['<leader>sa'] = { Snacks.picker.grep, 'Grep' },
+      ['<leader>sl'] = { Snacks.picker.lines, 'buffer lines' },
       ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
       ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
@@ -120,11 +123,11 @@ local function setup_mappings()
 
       -- misc
       ['<leader>n'] = { Snacks.rename.rename_file, 'rename current file' },
-      ['<leader><space>'] = { '<cmd>StripWhitespace<cr>', 'remove trailing whitespace' },
+      ['<c-g>'] = { ':', 'go to line' },
       ['<c-l>'] = { '<cmd>nohl<cr><c-l>', 'refersh no highlight search' },
       ['<cr>'] = { 'za', 'fold toggle current' },
       -- treesitter related
-      ['<leader>t<space>'] = { require'treesj'.toggle, 'treesitter - toggle split join' },
+      ['<leader>t<space>'] = { require 'treesj'.toggle, 'treesitter - toggle split join' },
     },
     v = {
       ['<leader>.'] = { '<esc><cmd>lua vim.lsp.buf.range_code_action()<CR>', 'code range actions' },
@@ -132,13 +135,13 @@ local function setup_mappings()
     },
     i = {
       ['<c-x><c-f>'] = {
-        function() require'blink.cmp'.show({ providers = {'path'} }) end,
+        function() require 'blink.cmp'.show({ providers = { 'path' } }) end,
         'complete file path',
       },
-      ['qq'] = {'<esc>', 'normal model'},
+      ['qq'] = { '<esc>', 'normal model' },
       ['<c-x><c-l>'] = {
         function()
-          local bl = require'blink.cmp'
+          local bl = require 'blink.cmp'
           if not bl.show() then
             if not bl.show_documentation() then
               bl.hide_documentation()
