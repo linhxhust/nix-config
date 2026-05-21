@@ -141,7 +141,7 @@ local function bootstrap()
   })
 
   -- Smear cursor setup
-  require('smear-cursor').setup({
+  require('smear_cursor').setup({
     cursor_color = "#d3869b", -- Change to your preferred color or keep default
     stiffness = 0.6,          -- Controls how fast the cursor catches up (lower is smearier)
     trail_length = 0.3,       -- Length of the smear trail
