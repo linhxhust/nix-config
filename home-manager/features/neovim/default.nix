@@ -64,6 +64,8 @@ let
         oil-nvim
         which-key-nvim
         snacks-nvim
+        neoscroll-nvim
+        smear-cursor-nvim
       ];
     };
 

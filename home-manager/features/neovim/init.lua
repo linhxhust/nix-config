@@ -126,6 +126,27 @@ local function bootstrap()
     notifier = {},
   })
   require 'conf/mappings'.setup()
+  require('neoscroll').setup({
+    -- All these keys will be mapped to their corresponding scrolling methods
+    mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>',
+      '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
+    hide_cursor = true,            -- Hide cursor while scrolling
+    stop_eof = true,               -- Stop at <EOF> when scrolling downwards
+    use_local_scrolloff = false,   -- Use the local scope of scrolloff instead of the global scope
+    respect_scrolloff = false,     -- Stop scrolling when the cursor reaches the scrolloff limit
+    cursor_scrolls_alone = true,   -- The cursor will keep on scrolling even if the window cannot scroll further
+    easing_function = 'quadratic', -- Default easing function
+    pre_hook = nil,                -- Function to run before the scrolling animation starts
+    post_hook = nil,               -- Function to run after the scrolling animation ends
+  })
+
+  -- Smear cursor setup
+  require('smear-cursor').setup({
+    cursor_color = "#d3869b", -- Change to your preferred color or keep default
+    stiffness = 0.6,          -- Controls how fast the cursor catches up (lower is smearier)
+    trail_length = 0.3,       -- Length of the smear trail
+    trailing_delay = 0.02,    -- Delay before the tail starts following
+  })
 end
 
 bootstrap()
