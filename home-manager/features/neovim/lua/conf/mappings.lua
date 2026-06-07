@@ -110,8 +110,9 @@ local function setup_mappings()
       ['<leader>sl'] = { Snacks.picker.lines, 'buffer lines' },
       ['<leader>sc'] = { Snacks.picker.grep_word, 'Search current word' },
       -- git
-      ['<leader>gc'] = { Snacks.picker.git_log, 'find git commits' },
-      ['<leader>gg'] = { Snacks.picker.git_log_file, 'find git commits for current buffer' },
+      ['<leader>gc'] = { Snacks.picker.git_log, 'git find commits' },
+      ['<leader>gg'] = { Snacks.picker.git_log_file, 'git find commits for current buffer' },
+      ['<leader>gl'] = { '<cmd>LazyGit<cr>', 'open lazygit' },
       ['\\'] = { function() Snacks.explorer() end, 'open file relative to current buffer' },
 
       -- buffer navigation

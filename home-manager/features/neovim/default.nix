@@ -14,6 +14,7 @@ let
         fd
         terraform-ls
         terraform
+        lazygit
       ];
     };
 
@@ -66,6 +67,9 @@ let
         snacks-nvim
         neoscroll-nvim
         smear-cursor-nvim
+
+        plenary-nvim
+        lazygit-nvim
       ];
     };
 
