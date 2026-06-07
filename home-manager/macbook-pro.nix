@@ -48,7 +48,7 @@
       ansible
       markdownlint-cli
       azure-cli
-      helix
+      lazygit
     ];
   };
 
