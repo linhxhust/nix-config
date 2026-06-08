@@ -15,6 +15,7 @@ let
         terraform-ls
         terraform
         lazygit
+        pyright
       ];
     };
 
@@ -45,6 +46,7 @@ let
           p.tree-sitter-typescript
           p.tree-sitter-tsx
           p.tree-sitter-hcl
+          p.tree-sitter-python
         ]))
         nvim-treesitter-textobjects
 
