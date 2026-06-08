@@ -75,6 +75,38 @@ local function setup_lsp_go()
   vim.lsp.enable('gopls')
 end
 
+local function setup_lsp_python()
+  local cmd = resolve_bin('pyright-langserver')
+  if not cmd then
+    return
+  end
+
+  vim.lsp.config('pyright', {
+    cmd = { cmd, '--stdio' },
+    filetypes = { 'python' },
+    root_markers = {
+      'pyproject.toml',
+      'setup.py',
+      'setup.cfg',
+      'requirements.txt',
+      'Pipfile',
+      'pyrightconfig.json',
+      '.git',
+    },
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = 'workspace',
+          useLibraryCodeForTypes = true,
+        },
+      },
+    },
+  })
+
+  vim.lsp.enable('pyright')
+end
+
 local function setup_lsp_lua()
   require 'lazydev'.setup {}
   vim.lsp.enable('lua_ls')
@@ -103,6 +135,7 @@ local function setup_lsp()
   setup_lsp_lua()
   setup_lsp_nix()
   setup_lsp_terraform()
+  setup_lsp_python()
 
   vim.lsp.enable('ts_ls')
 end
