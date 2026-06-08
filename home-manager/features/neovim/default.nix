@@ -14,6 +14,7 @@ let
         fd
         terraform-ls
         terraform
+        pyright
       ];
     };
 
@@ -44,6 +45,7 @@ let
           p.tree-sitter-typescript
           p.tree-sitter-tsx
           p.tree-sitter-hcl
+          p.tree-sitter-python
         ]))
         nvim-treesitter-textobjects
 
