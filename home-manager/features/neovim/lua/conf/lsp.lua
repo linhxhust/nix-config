@@ -114,15 +114,22 @@ end
 
 local function setup_lsp_nix()
   vim.lsp.config('nixd', {
-    nixpkgs = {
-      expr = nixCats_extra('nixdExtras.nixpkgs'),
-    },
-    options = {
-      nixos = {
-        expr = nixCats_extra('nixdExtras.nixos_options'),
-      },
-      ['home-manager'] = {
-        expr = nixCats_extra('nixdExtras.home_manager_options'),
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = nixCats_extra('nixdExtras.nixpkgs'),
+        },
+        formatting = {
+          command = { 'nixfmt' },
+        },
+        options = {
+          nixos = {
+            expr = nixCats_extra('nixdExtras.nixos_options'),
+          },
+          ['home-manager'] = {
+            expr = nixCats_extra('nixdExtras.home_manager_options'),
+          },
+        },
       },
     },
   })
