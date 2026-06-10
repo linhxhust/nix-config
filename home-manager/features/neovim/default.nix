@@ -17,6 +17,7 @@ let
         terraform
         lazygit
         pyright
+        ruff
       ];
     };
 
