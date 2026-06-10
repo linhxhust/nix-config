@@ -11,6 +11,7 @@ let
         lua-language-server
         nil
         nixd
+        nixfmt
         fd
         terraform-ls
         terraform
