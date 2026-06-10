@@ -76,35 +76,49 @@ local function setup_lsp_go()
 end
 
 local function setup_lsp_python()
-  local cmd = resolve_bin('pyright-langserver')
-  if not cmd then
-    return
-  end
-
-  vim.lsp.config('pyright', {
-    cmd = { cmd, '--stdio' },
-    filetypes = { 'python' },
-    root_markers = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-      'pyrightconfig.json',
-      '.git',
-    },
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          diagnosticMode = 'workspace',
-          useLibraryCodeForTypes = true,
+  local pyright_cmd = resolve_bin('pyright-langserver')
+  if pyright_cmd then
+    vim.lsp.config('pyright', {
+      cmd = { pyright_cmd, '--stdio' },
+      filetypes = { 'python' },
+      root_markers = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+        '.git',
+      },
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = 'workspace',
+            useLibraryCodeForTypes = true,
+          },
         },
       },
-    },
-  })
+    })
 
-  vim.lsp.enable('pyright')
+    vim.lsp.enable('pyright')
+  end
+
+  local ruff_cmd = resolve_bin('ruff')
+  if ruff_cmd then
+    vim.lsp.config('ruff', {
+      cmd = { ruff_cmd, 'server' },
+      filetypes = { 'python' },
+      root_markers = {
+        'pyproject.toml',
+        'ruff.toml',
+        '.ruff.toml',
+        '.git',
+      },
+    })
+
+    vim.lsp.enable('ruff')
+  end
 end
 
 local function setup_lsp_lua()
