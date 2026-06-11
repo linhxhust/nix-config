@@ -120,13 +120,15 @@ local function setup_mappings()
       ['<leader>bp'] = { ':bp<cr>', 'prev buffer' },
       ['<leader>bd'] = { ':bd<cr>', 'close current buffer' },
       ['<leader><tab>'] = { ':b#<cr>', 'last buffer' },
+      ['<leader>sv'] = { ':vsplit<cr>', 'split vertically' },
+      ['<leader>sh'] = { ':split<cr>', 'split horizontally' },
       -- misc
       ['<leader>fr'] = { Snacks.rename.rename_file, 'rename current file' },
       ['<leader>fs'] = { ':w<cr>', 'save current buffer' },
 
       ['<c-g>'] = { ':', 'go to line' },
       ['<c-l>'] = { '<cmd>nohl<cr><c-l>', 'refersh no highlight search' },
-      ['<cr>'] = { 'za', 'fold toggle current' },
+      -- ['<cr>'] = { 'za', 'fold toggle current' },
       -- treesitter related
       ['<leader>t<space>'] = { require 'treesj'.toggle, 'treesitter - toggle split join' },
     },
