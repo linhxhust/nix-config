@@ -9,6 +9,10 @@ in {
   home.packages = with pkgs;
     [ _1password-cli ] ++ lib.optionals (!isDarwin) [ onePasswordGui ];
 
+  darwin.trampolineApps.extraApps = lib.mkIf isDarwin [
+    "/Applications/1Password.app"
+  ];
+
   userConf.gitGpgSSHSignProgram = if isDarwin then
     "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
   else

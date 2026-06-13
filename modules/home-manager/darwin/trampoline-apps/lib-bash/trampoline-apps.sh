@@ -114,18 +114,40 @@ function mktrampoline() {
 }
 
 function sync_trampolines() {
-  [[ ! -d "$1" ]] && echo "Source directory does not exist" && return 1
+  local from_dir="$1"
+  local to_dir="$2"
+  shift 2
 
-  if [[ -d "$2" ]]; then
-    rm -rf "$2"
+  if [[ -d "$to_dir" ]]; then
+    rm -rf "$to_dir"
   fi
-  mkdir -p "$2"
+  mkdir -p "$to_dir"
 
-  apps=("$1"/*.app)
+  apps=()
+  if [[ -d "$from_dir" ]]; then
+    shopt -s nullglob
+    apps+=("$from_dir"/*.app)
+    shopt -u nullglob
+  else
+    echo "Source directory does not exist: $from_dir"
+  fi
 
-  for app in "${apps[@]}"; do
-    trampoline="$2/$(basename "$app")"
-    mktrampoline "$app" "$trampoline"
+  for app in "$@"; do
+    if [[ -d "$app" ]]; then
+      apps+=("$app")
+    else
+      echo "Skipping missing app: $app"
+    fi
   done
-  sync_dock "${apps[@]}"
+
+  trampolines=()
+  for app in "${apps[@]}"; do
+    trampoline="$to_dir/$(basename "$app")"
+    mktrampoline "$app" "$trampoline"
+    trampolines+=("$trampoline")
+  done
+
+  if ((${#trampolines[@]} > 0)); then
+    sync_dock "${trampolines[@]}"
+  fi
 }
