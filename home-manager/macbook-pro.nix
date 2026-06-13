@@ -49,6 +49,8 @@
       markdownlint-cli
       azure-cli
       lazygit
+      swiftlint
+      xcodegen
     ];
   };
 
