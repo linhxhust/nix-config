@@ -4,7 +4,7 @@
     programs.go = {
       enable = true;
       env = {
-       GOPATH = "/Users/linhnguyen/Tools";
+        GOPATH = "/Users/linhnguyen/Tools/go";
       };
     };
   };
