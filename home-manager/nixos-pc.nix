@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
   imports = [
     ./features/alacritty
     ./features/git
@@ -17,7 +17,7 @@
 
   home = {
     username = "linhnguyen";
-    homeDirectory = "/Users/linhnguyen";
+    homeDirectory = "/home/linhnguyen";
     stateVersion = "23.05";
     packages = with pkgs; [
       nerd-fonts.inconsolata
@@ -28,14 +28,12 @@
       _1password-gui
       docker-client
       hadolint
-      lima
       uv
       awscli2
       terraform
       terraform-ls
       golangci-lint
       gopls
-      colima
       docker
       kubectl
       kubernetes-helm
@@ -45,7 +43,6 @@
       krew
       inetutils
       pwgen
-      tcptraceroute
       ansible
       markdownlint-cli
       azure-cli
@@ -55,14 +52,12 @@
 
   programs.home-manager.enable = true;
 
+  programs.go.env.GOPATH = lib.mkForce "/home/linhnguyen/tools/go";
+
   userConf = {
-    terminalFontSize = 14.0;
-    gitGpgSSHSignProgram =
-      "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-    gitFolderConfigs = {
-      "/Users/linhnguyen/Workspace/corporate/" =
-        "/Users/linhnguyen/Workspace/corporate/.gitconfig";
-    };
+    terminalFontSize = 12.0;
+    gitGpgSSHSignProgram = lib.getExe' pkgs._1password-gui "op-ssh-sign";
+    gitFolderConfigs = { };
     shellProgram = "${pkgs.zsh}/bin/zsh";
   };
 
