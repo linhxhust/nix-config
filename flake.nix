@@ -42,6 +42,7 @@
 
           modules = [
             catppuccin.homeModules.catppuccin
+            homeManagerModules.darwin-trampoline-apps
             ./home-manager/nixos-pc.nix
           ];
         };
