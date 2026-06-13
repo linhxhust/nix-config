@@ -13,7 +13,9 @@
     else
       lib.getExe' pkgs._1password-gui "op-ssh-sign";
 
-  darwin.trampolineApps.extraApps = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
+}
+// lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+  darwin.trampolineApps.extraApps = [
     "/Applications/1Password.app"
   ];
 }
