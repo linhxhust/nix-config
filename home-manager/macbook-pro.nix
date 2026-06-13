@@ -1,5 +1,6 @@
 { pkgs, config, ... }: {
   imports = [
+    ./features/1password
     ./features/alacritty
     ./features/git
     ./features/tmux
@@ -25,7 +26,6 @@
       nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
-      _1password-gui
       docker-client
       hadolint
       lima
@@ -57,8 +57,6 @@
 
   userConf = {
     terminalFontSize = 14.0;
-    gitGpgSSHSignProgram =
-      "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     gitFolderConfigs = {
       "/Users/linhnguyen/Workspace/corporate/" =
         "/Users/linhnguyen/Workspace/corporate/.gitconfig";
