@@ -1,5 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [
+    ./features/1password
     ./features/alacritty
     ./features/git
     ./features/tmux
@@ -25,7 +26,6 @@
       nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
-      _1password-gui
       docker-client
       hadolint
       uv
@@ -56,7 +56,6 @@
 
   userConf = {
     terminalFontSize = 12.0;
-    gitGpgSSHSignProgram = lib.getExe' pkgs._1password-gui "op-ssh-sign";
     gitFolderConfigs = { };
     shellProgram = "${pkgs.zsh}/bin/zsh";
   };
