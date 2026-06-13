@@ -8,6 +8,7 @@
     ./features/neovim
     ./features/go
     ./features/nushell
+    ./features/tailscale
     ./features/user-configurations
   ];
 
@@ -26,7 +27,6 @@
       nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
-      docker-client
       hadolint
       uv
       awscli2

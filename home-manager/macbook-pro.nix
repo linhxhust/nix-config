@@ -26,7 +26,6 @@
       nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
-      docker-client
       hadolint
       lima
       uv
