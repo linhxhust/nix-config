@@ -51,6 +51,7 @@
       lazygit
       swiftlint
       xcodegen
+      vfkit
     ];
   };
 
