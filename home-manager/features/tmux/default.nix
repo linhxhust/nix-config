@@ -60,7 +60,7 @@
 
         # use vim key bindings
         setw -g mode-keys vi
-        set-option -g mouse on
+        set-option -g mouse off
 
         # decrease command delay (increases vim responsiveness)
         set -sg escape-time 1
