@@ -7,6 +7,7 @@
     ./features/zsh
     ./features/neovim
     ./features/go
+    ./features/rust
     ./features/nushell
     ./features/user-configurations
   ];
@@ -69,6 +70,8 @@
   tmuxOpts.shell = config.userConf.shellProgram;
 
   catppuccin = {
+    enable = true;
+    autoEnable = false;
     flavor = "frappe";
     tmux.enable = true;
     starship.enable = true;

@@ -18,6 +18,7 @@ let
         lazygit
         pyright
         ruff
+        rust-analyzer
       ];
     };
 
