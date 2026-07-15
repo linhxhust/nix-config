@@ -63,6 +63,8 @@
   tmuxOpts.shell = config.userConf.shellProgram;
 
   catppuccin = {
+    enable = true;
+    autoEnable = false;
     flavor = "frappe";
     tmux.enable = true;
     starship.enable = true;
