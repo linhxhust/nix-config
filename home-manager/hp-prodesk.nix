@@ -1,0 +1,85 @@
+{ pkgs, config, lib, ... }: {
+  imports = [
+    ./features/git
+    ./features/tmux
+    ./features/zsh
+    ./features/neovim
+    ./features/go
+    ./features/rust
+    ./features/nushell
+    ./features/tailscale
+    ./features/user-configurations
+  ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
+  };
+
+  home = {
+    username = "linhnguyen";
+    homeDirectory = "/home/linhnguyen";
+    stateVersion = "23.05";
+    packages = with pkgs; [
+      nerd-fonts.inconsolata
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.iosevka
+      hadolint
+      uv
+      awscli2
+      terraform
+      terraform-ls
+      golangci-lint
+      gopls
+      docker
+      kubectl
+      kubernetes-helm
+      tflint
+      zoxide
+      eza
+      krew
+      inetutils
+      pwgen
+      ansible
+      markdownlint-cli
+      azure-cli
+      lazygit
+      claude-code
+    ];
+  };
+
+  programs.home-manager.enable = true;
+
+  programs.go.env.GOPATH = lib.mkForce "/home/linhnguyen/tools/go";
+
+  # 1password (op-ssh-sign) is not installed on this host, so disable commit signing.
+  programs.git.settings.commit.gpgsign = lib.mkForce false;
+
+  userConf = {
+    terminalFontSize = 12.0;
+    gitFolderConfigs = { };
+    shellProgram = "${pkgs.zsh}/bin/zsh";
+  };
+
+  tmuxOpts = {
+    shell = config.userConf.shellProgram;
+    prefix = "C-b";
+  };
+
+  catppuccin = {
+    enable = true;
+    autoEnable = false;
+    flavor = "frappe";
+    tmux.enable = true;
+    starship.enable = true;
+  };
+
+  fonts.fontconfig.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+}

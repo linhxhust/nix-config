@@ -4,6 +4,7 @@ Home Manager flake for personal machines:
 
 - `linhnguyen@mac-m4`: macOS / Apple Silicon (`aarch64-darwin`)
 - `linhnguyen@nixos-pc`: NixOS PC (`x86_64-linux`)
+- `linhnguyen@hp-prodesk`: HP ProDesk (`x86_64-linux`)
 
 ## Usage
 
@@ -24,3 +25,11 @@ home-manager switch --flake .#linhnguyen@nixos-pc
 ```
 
 The NixOS PC profile reuses the same shared Home Manager features as the macOS profile, but uses the Linux home directory `/home/linhnguyen` and does not load the macOS trampoline app module.
+
+### HP ProDesk
+
+```bash
+home-manager switch --flake .#linhnguyen@hp-prodesk
+```
+
+Another `x86_64-linux` profile, mirroring the NixOS PC feature set and adding the Rust toolchain (`features/rust`) alongside Go, plus the `claude-code` package (this host only).

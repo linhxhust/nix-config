@@ -6,6 +6,11 @@
         description = "Shell for tmux";
         default = "${pkgs.zsh}/bin/zsh";
       };
+      prefix = lib.mkOption {
+        type = lib.types.str;
+        description = "tmux prefix key";
+        default = "C-a";
+      };
     };
   };
   config = {
@@ -84,7 +89,7 @@
 
         # tmux prefix
         unbind C-b
-        set -g prefix C-a
+        set -g prefix ${config.tmuxOpts.prefix}
         bind-key j send-prefix
 
         # copy with 'enter' or 'y' and send to mac os clipboard: http://goo.gl/2Bfn8
