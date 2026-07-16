@@ -46,6 +46,19 @@
             ./home-manager/nixos-pc.nix
           ];
         };
+
+        "linhnguyen@hp-prodesk" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${linuxSystem};
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+
+          modules = [
+            catppuccin.homeModules.catppuccin
+            homeManagerModules.darwin-trampoline-apps
+            ./home-manager/hp-prodesk.nix
+          ];
+        };
       };
     };
 }
