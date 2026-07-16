@@ -1,7 +1,5 @@
 { pkgs, config, lib, ... }: {
   imports = [
-    ./features/1password
-    ./features/alacritty
     ./features/git
     ./features/tmux
     ./features/zsh
@@ -62,7 +60,10 @@
     shellProgram = "${pkgs.zsh}/bin/zsh";
   };
 
-  tmuxOpts.shell = config.userConf.shellProgram;
+  tmuxOpts = {
+    shell = config.userConf.shellProgram;
+    prefix = "C-b";
+  };
 
   catppuccin = {
     enable = true;
@@ -70,7 +71,6 @@
     flavor = "frappe";
     tmux.enable = true;
     starship.enable = true;
-    alacritty.enable = true;
   };
 
   fonts.fontconfig.enable = true;
