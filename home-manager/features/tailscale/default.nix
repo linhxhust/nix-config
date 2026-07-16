@@ -4,8 +4,18 @@ let
   authKeyPath = "${config.home.homeDirectory}/.config/tailscale-auth-key";
 in
 {
+  options.tailscaleOpts.installPackage = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = ''
+      Install the tailscale CLI from nixpkgs. Disable on hosts where the
+      tailscale client and tailscaled daemon are provided by the OS, to
+      avoid client/daemon version skew.
+    '';
+  };
+
   config = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
-    home.packages = [ pkgs.tailscale ];
+    home.packages = lib.optional config.tailscaleOpts.installPackage pkgs.tailscale;
 
     systemd.user.services.tailscale-up = {
       Unit = {
