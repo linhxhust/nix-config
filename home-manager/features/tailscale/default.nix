@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  authKeyPath = "${config.home.homeDirectory}/.config/tailscale-aut-key";
+  authKeyPath = "${config.home.homeDirectory}/.config/tailscale-auth-key";
 in
 {
   config = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
