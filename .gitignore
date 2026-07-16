@@ -2,3 +2,8 @@ result
 
 .DS_Store
 tmp/
+
+# private, machine-local GitHub runner declarations (keep off the public repo)
+hp-prodesk-runners.nix
+*-runners.nix
+!*-runners.nix.example

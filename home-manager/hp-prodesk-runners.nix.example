@@ -1,0 +1,22 @@
+# Private GitHub Actions runner declarations for hp-prodesk.
+#
+# Copy this file to a location OUTSIDE this (public) repo:
+#   ~/.config/nix-config/hp-prodesk-runners.nix
+#
+# hp-prodesk.nix imports it when present and assigns it to `githubRunners`.
+# Because it lives outside the flake, switching must be done with --impure:
+#   home-manager switch --flake .#linhnguyen@hp-prodesk --impure
+#
+# This is a plain attrset: one entry per repository. Do NOT commit the real
+# file — it (and the token files it points at) must stay off the public repo.
+{
+  example-repo = {
+    url = "https://github.com/OWNER/REPO";
+
+    # A file holding a GitHub PAT with repository administration scope (or a
+    # registration token). Keep it outside the repo as well.
+    tokenFile = "/home/linhnguyen/.config/github-runner/example-repo.token";
+
+    labels = [ "self-hosted" "linux" "hp-prodesk" ];
+  };
+}
