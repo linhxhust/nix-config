@@ -8,6 +8,7 @@
     ./features/rust
     ./features/nushell
     ./features/tailscale
+    ./features/github-runners
     ./features/user-configurations
   ];
 
@@ -74,6 +75,19 @@
     flavor = "frappe";
     tmux.enable = true;
     starship.enable = true;
+  };
+
+  # Self-hosted GitHub Actions runners, one per repository.
+  # Put a GitHub PAT (repo administration scope) in each tokenFile, then:
+  #   sudo loginctl enable-linger "$USER"
+  #   systemctl --user daemon-reload
+  #   systemctl --user enable --now github-runner-<name>
+  githubRunners = {
+    # nix-config = {
+    #   url = "https://github.com/linhxhust/nix-config";
+    #   tokenFile = "/home/linhnguyen/.config/github-runner/nix-config.token";
+    #   labels = [ "self-hosted" "linux" "hp-prodesk" ];
+    # };
   };
 
   fonts.fontconfig.enable = true;

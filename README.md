@@ -33,3 +33,29 @@ home-manager switch --flake .#linhnguyen@hp-prodesk
 ```
 
 Another `x86_64-linux` profile, mirroring the NixOS PC feature set and adding the Rust toolchain (`features/rust`) alongside Go, plus the `claude-code` package (this host only).
+
+#### Self-hosted GitHub Actions runners
+
+`features/github-runners` runs one self-hosted Actions runner per repository as a
+systemd user service. Declare runners in the host profile:
+
+```nix
+githubRunners.my-repo = {
+  url = "https://github.com/owner/my-repo";
+  tokenFile = "/home/linhnguyen/.config/github-runner/my-repo.token";
+  labels = [ "self-hosted" "linux" "hp-prodesk" ];
+};
+```
+
+`tokenFile` holds a GitHub PAT with repository administration scope (the runner
+exchanges it for a registration token, so it survives restarts). After
+`home-manager switch`, enable the units:
+
+```bash
+sudo loginctl enable-linger "$USER"   # keep user services running without a login session
+systemctl --user daemon-reload
+systemctl --user enable --now github-runner-my-repo
+```
+
+To re-register a runner (changed URL/labels), stop the unit and delete
+`~/.local/share/github-runner/<name>` before switching again.
