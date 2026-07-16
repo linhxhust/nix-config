@@ -37,19 +37,33 @@ Another `x86_64-linux` profile, mirroring the NixOS PC feature set and adding th
 #### Self-hosted GitHub Actions runners
 
 `features/github-runners` runs one self-hosted Actions runner per repository as a
-systemd user service. Declare runners in the host profile:
+systemd user service.
+
+Because this repo is public, the actual runner declarations (repo URLs, labels)
+are kept **outside** the repo. Copy `home-manager/hp-prodesk-runners.nix.example`
+to `~/.config/nix-config/hp-prodesk-runners.nix` — a plain attrset, one entry per
+repo:
 
 ```nix
-githubRunners.my-repo = {
-  url = "https://github.com/owner/my-repo";
-  tokenFile = "/home/linhnguyen/.config/github-runner/my-repo.token";
-  labels = [ "self-hosted" "linux" "hp-prodesk" ];
-};
+{
+  my-repo = {
+    url = "https://github.com/owner/my-repo";
+    tokenFile = "/home/linhnguyen/.config/github-runner/my-repo.token";
+    labels = [ "self-hosted" "linux" "hp-prodesk" ];
+  };
+}
+```
+
+`hp-prodesk.nix` imports that file when it exists. Since it lives outside the
+flake, switch with `--impure`:
+
+```bash
+home-manager switch --flake .#linhnguyen@hp-prodesk --impure
 ```
 
 `tokenFile` holds a GitHub PAT with repository administration scope (the runner
-exchanges it for a registration token, so it survives restarts). After
-`home-manager switch`, enable the units:
+exchanges it for a registration token, so it survives restarts); keep it outside
+the repo too. After switching, enable the units:
 
 ```bash
 sudo loginctl enable-linger "$USER"   # keep user services running without a login session

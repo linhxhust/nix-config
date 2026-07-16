@@ -77,18 +77,19 @@
     starship.enable = true;
   };
 
-  # Self-hosted GitHub Actions runners, one per repository.
-  # Put a GitHub PAT (repo administration scope) in each tokenFile, then:
-  #   sudo loginctl enable-linger "$USER"
-  #   systemctl --user daemon-reload
-  #   systemctl --user enable --now github-runner-<name>
-  githubRunners = {
-    # nix-config = {
-    #   url = "https://github.com/linhxhust/nix-config";
-    #   tokenFile = "/home/linhnguyen/.config/github-runner/nix-config.token";
-    #   labels = [ "self-hosted" "linux" "hp-prodesk" ];
-    # };
-  };
+  # Self-hosted GitHub Actions runners are declared in a private file kept
+  # OUTSIDE this public repo, so the repo URLs/labels stay private. Copy
+  # home-manager/hp-prodesk-runners.nix.example to
+  #   ~/.config/nix-config/hp-prodesk-runners.nix
+  # (a plain attrset, one entry per repo) and switch with --impure:
+  #   home-manager switch --flake .#linhnguyen@hp-prodesk --impure
+  # Reading a path outside the flake needs --impure; without the file this is
+  # an empty set and no runners are created.
+  githubRunners =
+    let
+      runnersFile = "${config.home.homeDirectory}/.config/nix-config/hp-prodesk-runners.nix";
+    in
+    lib.optionalAttrs (builtins.pathExists runnersFile) (import runnersFile);
 
   fonts.fontconfig.enable = true;
 
