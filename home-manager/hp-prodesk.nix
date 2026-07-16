@@ -54,6 +54,9 @@
 
   programs.go.env.GOPATH = lib.mkForce "/home/linhnguyen/tools/go";
 
+  # 1password (op-ssh-sign) is not installed on this host, so disable commit signing.
+  programs.git.settings.commit.gpgsign = lib.mkForce false;
+
   userConf = {
     terminalFontSize = 12.0;
     gitFolderConfigs = { };
