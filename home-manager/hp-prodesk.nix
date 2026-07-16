@@ -8,7 +8,6 @@
     ./features/neovim
     ./features/go
     ./features/rust
-    ./features/claude-code
     ./features/nushell
     ./features/tailscale
     ./features/user-configurations
@@ -49,6 +48,7 @@
       markdownlint-cli
       azure-cli
       lazygit
+      claude-code
     ];
   };
 

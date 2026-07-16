@@ -32,4 +32,4 @@ The NixOS PC profile reuses the same shared Home Manager features as the macOS p
 home-manager switch --flake .#linhnguyen@hp-prodesk
 ```
 
-Another `x86_64-linux` profile, mirroring the NixOS PC feature set and adding the Rust toolchain (`features/rust`) alongside Go, plus Claude Code (`features/claude-code`, this host only).
+Another `x86_64-linux` profile, mirroring the NixOS PC feature set and adding the Rust toolchain (`features/rust`) alongside Go, plus the `claude-code` package (this host only).
