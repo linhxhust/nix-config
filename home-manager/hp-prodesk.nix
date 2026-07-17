@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [
     ./features/git
-    ./features/tmux
     ./features/zsh
     ./features/neovim
     ./features/go
