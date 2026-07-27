@@ -90,6 +90,10 @@
     in
     lib.optionalAttrs (builtins.pathExists runnersFile) (import runnersFile);
 
+  # NFS share from Synology DS223 (192.168.1.100:/volume1/media)
+  # Mounted at system level via /etc/fstab — see docs/nfs-setup.md
+  jellyfinOpts.mediaPath = "/home/linhnguyen/mnt/nas/media";
+
   fonts.fontconfig.enable = true;
 
   programs.direnv = {

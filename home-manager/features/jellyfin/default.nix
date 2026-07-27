@@ -27,6 +27,7 @@ in {
 
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
+        "${homeDir}/mnt/nas/media" \
         "${homeDir}/.local/share/jellyfin/config" \
         "${homeDir}/.local/share/jellyfin/cache" \
         "${homeDir}/.local/share/jellyseerr" \
