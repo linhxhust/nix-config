@@ -9,6 +9,7 @@
     ./features/tailscale
     ./features/github-runners
     ./features/user-configurations
+    ./features/jellyfin
   ];
 
   nixpkgs.config = {
