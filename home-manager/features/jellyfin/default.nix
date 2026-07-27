@@ -23,7 +23,8 @@ in {
         "${homeDir}/.local/share/qbittorrent" \
         "${homeDir}/.local/share/radarr" \
         "${homeDir}/.local/share/radarr4k" \
-        "${homeDir}/.local/share/sonarr"
+        "${homeDir}/.local/share/sonarr" \
+        "${homeDir}/.local/share/prowlarr"
     '';
 
     home.file."jellyfin/docker-compose.yml".text = ''
@@ -86,6 +87,21 @@ in {
           volumes:
             - ${homeDir}/.local/share/radarr:/config
             - ${cfg.mediaPath}:/media
+          networks:
+            - media
+          restart: unless-stopped
+
+        prowlarr:
+          image: lscr.io/linuxserver/prowlarr:latest
+          container_name: prowlarr
+          environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Asia/Ho_Chi_Minh
+          ports:
+            - "9696:9696"
+          volumes:
+            - ${homeDir}/.local/share/prowlarr:/config
           networks:
             - media
           restart: unless-stopped
