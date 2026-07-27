@@ -8,8 +8,7 @@ let
 in {
   options.jellyfinOpts.mediaPath = lib.mkOption {
     type = lib.types.str;
-    # Switch to NFS mount point once configured, e.g. "/mnt/nas/media"
-    default = "${homeDir}/mnt/nas/media";
+    default = "/mnt/nas/media";
     description = "Absolute path to the media directory (local or NFS mount point).";
   };
 
