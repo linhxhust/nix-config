@@ -66,6 +66,7 @@ in {
         qbittorrent:
           image: lscr.io/linuxserver/qbittorrent:latest
           container_name: qbittorrent
+          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
@@ -85,6 +86,7 @@ in {
         radarr:
           image: lscr.io/linuxserver/radarr:latest
           container_name: radarr
+          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
@@ -101,6 +103,7 @@ in {
         sonarr:
           image: lscr.io/linuxserver/sonarr:latest
           container_name: sonarr
+          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
