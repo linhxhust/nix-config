@@ -4,7 +4,7 @@ let
   homeDir = config.home.homeDirectory;
   cfg = config.jellyfinOpts;
   composeFile = "${homeDir}/jellyfin/docker-compose.yml";
-  docker = "${pkgs.docker}/bin/docker";
+  podmanCompose = "${pkgs.podman-compose}/bin/podman-compose";
 in {
   options.jellyfinOpts.mediaPath = lib.mkOption {
     type = lib.types.str;
@@ -85,8 +85,8 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${docker} compose -f ${composeFile} up -d --remove-orphans";
-        ExecStop = "${docker} compose -f ${composeFile} down";
+        ExecStart = "${podmanCompose} -f ${composeFile} up -d --remove-orphans";
+        ExecStop = "${podmanCompose} -f ${composeFile} down";
       };
 
       Install.WantedBy = [ "default.target" ];
