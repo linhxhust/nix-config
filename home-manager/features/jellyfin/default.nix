@@ -8,8 +8,7 @@ let
 in {
   options.jellyfinOpts.mediaPath = lib.mkOption {
     type = lib.types.str;
-    # Switch to NFS mount point once configured, e.g. "/mnt/nas/media"
-    default = "${homeDir}/mnt/nas/media";
+    default = "/mnt/nas/media";
     description = "Absolute path to the media directory (local or NFS mount point).";
   };
 
@@ -27,7 +26,6 @@ in {
 
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
-        "${homeDir}/mnt/nas/media" \
         "${homeDir}/.local/share/jellyfin/config" \
         "${homeDir}/.local/share/jellyfin/cache" \
         "${homeDir}/.local/share/jellyseerr" \

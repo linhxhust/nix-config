@@ -92,7 +92,7 @@
 
   # NFS share from Synology DS223 (192.168.1.100:/volume1/media)
   # Mounted at system level via /etc/fstab — see docs/nfs-setup.md
-  jellyfinOpts.mediaPath = "/home/linhnguyen/mnt/nas/media";
+  jellyfinOpts.mediaPath = "/mnt/nas/media";
 
   fonts.fontconfig.enable = true;
 
