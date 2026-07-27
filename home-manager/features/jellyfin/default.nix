@@ -91,6 +91,18 @@ in {
             - media
           restart: unless-stopped
 
+        flaresolverr:
+          image: docker.io/flaresolverr/flaresolverr:latest
+          container_name: flaresolverr
+          environment:
+            - TZ=Asia/Ho_Chi_Minh
+            - LOG_LEVEL=info
+          ports:
+            - "8191:8191"
+          networks:
+            - media
+          restart: unless-stopped
+
         prowlarr:
           image: lscr.io/linuxserver/prowlarr:latest
           container_name: prowlarr
