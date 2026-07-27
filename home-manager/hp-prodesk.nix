@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [
     ./features/git
-    ./features/tmux
     ./features/zsh
     ./features/neovim
     ./features/go
@@ -10,6 +9,7 @@
     ./features/tailscale
     ./features/github-runners
     ./features/user-configurations
+    ./features/jellyfin
   ];
 
   nixpkgs.config = {
