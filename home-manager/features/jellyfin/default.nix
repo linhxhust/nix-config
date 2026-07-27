@@ -121,8 +121,10 @@ in {
         Type = "oneshot";
         RemainAfterExit = true;
         Environment = "PATH=${pkgs.docker}/bin:/usr/bin:/bin";
-        ExecStart = "${dockerBin} compose -f ${composeFile} up -d --remove-orphans";
-        ExecStop = "${dockerBin} compose -f ${composeFile} down";
+        # sg activates the docker group for the process so the socket is
+        # accessible even when the systemd --user session predates usermod.
+        ExecStart = "/usr/bin/sg docker -c '${dockerBin} compose -f ${composeFile} up -d --remove-orphans'";
+        ExecStop = "/usr/bin/sg docker -c '${dockerBin} compose -f ${composeFile} down'";
       };
 
       Install.WantedBy = [ "default.target" ];
