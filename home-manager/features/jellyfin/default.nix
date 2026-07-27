@@ -24,7 +24,8 @@ in {
         "${homeDir}/.local/share/radarr" \
         "${homeDir}/.local/share/radarr4k" \
         "${homeDir}/.local/share/sonarr" \
-        "${homeDir}/.local/share/prowlarr"
+        "${homeDir}/.local/share/prowlarr" \
+        "${homeDir}/.local/share/bazarr"
     '';
 
     home.file."jellyfin/docker-compose.yml".text = ''
@@ -86,6 +87,22 @@ in {
             - "7878:7878"
           volumes:
             - ${homeDir}/.local/share/radarr:/config
+            - ${cfg.mediaPath}:/media
+          networks:
+            - media
+          restart: unless-stopped
+
+        bazarr:
+          image: lscr.io/linuxserver/bazarr:latest
+          container_name: bazarr
+          environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Asia/Ho_Chi_Minh
+          ports:
+            - "6767:6767"
+          volumes:
+            - ${homeDir}/.local/share/bazarr:/config
             - ${cfg.mediaPath}:/media
           networks:
             - media
