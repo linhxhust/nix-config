@@ -14,6 +14,8 @@ in {
   };
 
   config = {
+    home.sessionVariables.PATH = "${pkgs.podman}/bin:${pkgs.podman-compose}/bin:$PATH";
+
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
         "${homeDir}/.local/share/jellyfin/config" \
@@ -85,6 +87,7 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
+        Environment = "PATH=${pkgs.podman}/bin:${pkgs.podman-compose}/bin:/run/wrappers/bin:/usr/bin:/bin";
         ExecStart = "${podmanCompose} -f ${composeFile} up -d --remove-orphans";
         ExecStop = "${podmanCompose} -f ${composeFile} down";
       };
