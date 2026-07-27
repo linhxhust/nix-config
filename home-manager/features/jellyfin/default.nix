@@ -85,6 +85,7 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
+        Environment = "PATH=${pkgs.podman}/bin:${pkgs.podman-compose}/bin:/run/wrappers/bin:/usr/bin:/bin";
         ExecStart = "${podmanCompose} -f ${composeFile} up -d --remove-orphans";
         ExecStop = "${podmanCompose} -f ${composeFile} down";
       };
