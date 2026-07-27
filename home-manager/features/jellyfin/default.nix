@@ -16,6 +16,15 @@ in {
   config = {
     home.sessionVariables.PATH = "${pkgs.podman}/bin:${pkgs.podman-compose}/bin:$PATH";
 
+    # Podman rootless config: trust policy + default search registry
+    xdg.configFile."containers/policy.json".text = builtins.toJSON {
+      default = [{ type = "insecureAcceptAnything"; }];
+    };
+
+    xdg.configFile."containers/registries.conf".text = ''
+      unqualified-search-registries = ["docker.io"]
+    '';
+
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
         "${homeDir}/.local/share/jellyfin/config" \
@@ -27,7 +36,7 @@ in {
     home.file."jellyfin/docker-compose.yml".text = ''
       services:
         jellyfin:
-          image: jellyfin/jellyfin:latest
+          image: docker.io/jellyfin/jellyfin:latest
           container_name: jellyfin
           ports:
             - "8096:8096"
@@ -41,7 +50,7 @@ in {
           restart: unless-stopped
 
         jellyseerr:
-          image: fallenbagel/jellyseerr:latest
+          image: docker.io/fallenbagel/jellyseerr:latest
           container_name: jellyseerr
           environment:
             - TZ=Asia/Ho_Chi_Minh
