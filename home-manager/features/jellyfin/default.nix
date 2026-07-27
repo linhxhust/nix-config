@@ -14,6 +14,8 @@ in {
   };
 
   config = {
+    home.sessionVariables.PATH = "${pkgs.podman}/bin:${pkgs.podman-compose}/bin:$PATH";
+
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
         "${homeDir}/.local/share/jellyfin/config" \
