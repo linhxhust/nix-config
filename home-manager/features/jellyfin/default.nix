@@ -4,7 +4,7 @@ let
   homeDir = config.home.homeDirectory;
   cfg = config.jellyfinOpts;
   composeFile = "${homeDir}/jellyfin/docker-compose.yml";
-  podmanCompose = "${pkgs.podman-compose}/bin/podman-compose";
+  dockerBin = "${pkgs.docker}/bin/docker";
 in {
   options.jellyfinOpts.mediaPath = lib.mkOption {
     type = lib.types.str;
@@ -13,16 +13,7 @@ in {
   };
 
   config = {
-    home.sessionVariables.PATH = "${pkgs.podman}/bin:${pkgs.podman-compose}/bin:$PATH";
-
-    # Podman rootless config: trust policy + default search registry
-    xdg.configFile."containers/policy.json".text = builtins.toJSON {
-      default = [{ type = "insecureAcceptAnything"; }];
-    };
-
-    xdg.configFile."containers/registries.conf".text = ''
-      unqualified-search-registries = ["docker.io"]
-    '';
+    home.packages = [ pkgs.docker ];
 
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
@@ -66,7 +57,6 @@ in {
         qbittorrent:
           image: lscr.io/linuxserver/qbittorrent:latest
           container_name: qbittorrent
-          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
@@ -86,7 +76,6 @@ in {
         radarr:
           image: lscr.io/linuxserver/radarr:latest
           container_name: radarr
-          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
@@ -103,7 +92,6 @@ in {
         sonarr:
           image: lscr.io/linuxserver/sonarr:latest
           container_name: sonarr
-          userns_mode: keep-id
           environment:
             - PUID=1000
             - PGID=1000
@@ -132,9 +120,9 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
-        Environment = "PATH=${pkgs.podman}/bin:${pkgs.podman-compose}/bin:/run/wrappers/bin:/usr/bin:/bin";
-        ExecStart = "${podmanCompose} -f ${composeFile} up -d --remove-orphans";
-        ExecStop = "${podmanCompose} -f ${composeFile} down";
+        Environment = "PATH=${pkgs.docker}/bin:/usr/bin:/bin";
+        ExecStart = "${dockerBin} compose -f ${composeFile} up -d --remove-orphans";
+        ExecStop = "${dockerBin} compose -f ${composeFile} down";
       };
 
       Install.WantedBy = [ "default.target" ];

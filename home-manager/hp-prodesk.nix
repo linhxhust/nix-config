@@ -34,8 +34,6 @@
       terraform-ls
       golangci-lint
       gopls
-      podman
-      podman-compose
       kubectl
       kubernetes-helm
       tflint
