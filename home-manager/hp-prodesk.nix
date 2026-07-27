@@ -90,9 +90,12 @@
     in
     lib.optionalAttrs (builtins.pathExists runnersFile) (import runnersFile);
 
-  # NFS share from Synology DS223 (192.168.1.100:/volume1/media)
-  # Mounted at system level via /etc/fstab — see docs/nfs-setup.md
-  jellyfinOpts.mediaPath = "/mnt/nas/media";
+  # NAS media share — mounted via SSHFS (user-level FUSE) so Podman rootless
+  # can bind-mount it. Requires SSH key ~/.ssh/id_nas authorized on the NAS.
+  jellyfinOpts = {
+    mediaPath = "${config.home.homeDirectory}/mnt/nas/media";
+    nas.user = "linhnguyen";
+  };
 
   fonts.fontconfig.enable = true;
 

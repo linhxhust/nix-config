@@ -3,19 +3,47 @@
 let
   homeDir = config.home.homeDirectory;
   cfg = config.jellyfinOpts;
+  nas = cfg.nas;
   composeFile = "${homeDir}/jellyfin/docker-compose.yml";
   podmanCompose = "${pkgs.podman-compose}/bin/podman-compose";
+  sshfsBin = "${pkgs.sshfs}/bin/sshfs";
+  fusermount3Bin = "${pkgs.fuse3}/bin/fusermount3";
 in {
-  options.jellyfinOpts.mediaPath = lib.mkOption {
-    type = lib.types.str;
-    default = "/mnt/nas/media";
-    description = "Absolute path to the media directory (local or NFS mount point).";
+  options.jellyfinOpts = {
+    mediaPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/mnt/nas/media";
+      description = "Absolute path to the media directory mounted for containers.";
+    };
+
+    nas = {
+      host = lib.mkOption {
+        type = lib.types.str;
+        default = "192.168.1.100";
+        description = "NAS hostname or IP address.";
+      };
+      exportPath = lib.mkOption {
+        type = lib.types.str;
+        default = "/volume1/media";
+        description = "Remote path on the NAS to mount.";
+      };
+      user = lib.mkOption {
+        type = lib.types.str;
+        description = "SSH username on the NAS.";
+      };
+      sshKeyFile = lib.mkOption {
+        type = lib.types.str;
+        default = "${homeDir}/.ssh/id_nas";
+        description = "Path to the SSH private key used for SSHFS authentication.";
+      };
+    };
   };
 
   config = {
+    home.packages = [ pkgs.sshfs pkgs.fuse3 ];
+
     home.sessionVariables.PATH = "${pkgs.podman}/bin:${pkgs.podman-compose}/bin:$PATH";
 
-    # Podman rootless config: trust policy + default search registry
     xdg.configFile."containers/policy.json".text = builtins.toJSON {
       default = [{ type = "insecureAcceptAnything"; }];
     };
@@ -26,6 +54,7 @@ in {
 
     home.activation.jellyfinDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p \
+        "${cfg.mediaPath}" \
         "${homeDir}/.local/share/jellyfin/config" \
         "${homeDir}/.local/share/jellyfin/cache" \
         "${homeDir}/.local/share/jellyseerr" \
@@ -122,11 +151,31 @@ in {
           driver: bridge
     '';
 
+    # SSHFS mount: FUSE-based, user-level — Podman rootless can bind-mount it
+    # unlike root-owned NFS mounts which the kernel blocks in user namespaces.
+    systemd.user.services.nas-mount = {
+      Unit = {
+        Description = "SSHFS mount of NAS media share";
+        After = [ "network-online.target" ];
+        Wants = [ "network-online.target" ];
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${sshfsBin} -f -o StrictHostKeyChecking=no,IdentityFile=${nas.sshKeyFile},reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 ${nas.user}@${nas.host}:${nas.exportPath} ${cfg.mediaPath}";
+        ExecStop = "${fusermount3Bin} -u ${cfg.mediaPath}";
+        Restart = "on-failure";
+        RestartSec = "10s";
+        Environment = "PATH=${pkgs.sshfs}/bin:${pkgs.fuse3}/bin:/usr/bin:/bin";
+      };
+      Install.WantedBy = [ "default.target" ];
+    };
+
     systemd.user.services.jellyfin-stack = {
       Unit = {
         Description = "Jellyfin media stack (Jellyfin + Jellyseerr + qBittorrent + Radarr + Sonarr)";
-        After = [ "network-online.target" ];
+        After = [ "network-online.target" "nas-mount.service" ];
         Wants = [ "network-online.target" ];
+        Requires = [ "nas-mount.service" ];
       };
 
       Service = {
