@@ -22,6 +22,7 @@ in {
         "${homeDir}/.local/share/jellyseerr" \
         "${homeDir}/.local/share/qbittorrent" \
         "${homeDir}/.local/share/radarr" \
+        "${homeDir}/.local/share/radarr4k" \
         "${homeDir}/.local/share/sonarr"
     '';
 
@@ -84,6 +85,22 @@ in {
             - "7878:7878"
           volumes:
             - ${homeDir}/.local/share/radarr:/config
+            - ${cfg.mediaPath}:/media
+          networks:
+            - media
+          restart: unless-stopped
+
+        radarr4k:
+          image: lscr.io/linuxserver/radarr:latest
+          container_name: radarr4k
+          environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Asia/Ho_Chi_Minh
+          ports:
+            - "7879:7878"
+          volumes:
+            - ${homeDir}/.local/share/radarr4k:/config
             - ${cfg.mediaPath}:/media
           networks:
             - media
