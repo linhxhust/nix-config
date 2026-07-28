@@ -1,4 +1,10 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   imports = [
     ./features/git
     ./features/zsh
@@ -68,10 +74,16 @@
     shellProgram = "${pkgs.zsh}/bin/zsh";
   };
 
+  tmuxOpts = {
+    shell = config.userConf.shellProgram;
+    prefix = "C-b";
+  };
+
   catppuccin = {
     enable = true;
     autoEnable = false;
     flavor = "frappe";
+    tmux.enable = true;
     starship.enable = true;
   };
 
