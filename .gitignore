@@ -7,3 +7,4 @@ tmp/
 hp-prodesk-runners.nix
 *-runners.nix
 !*-runners.nix.example
+.claude/

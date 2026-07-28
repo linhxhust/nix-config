@@ -10,6 +10,7 @@
     ./features/github-runners
     ./features/user-configurations
     ./features/jellyfin
+    ./features/tmux
   ];
 
   nixpkgs.config = {
