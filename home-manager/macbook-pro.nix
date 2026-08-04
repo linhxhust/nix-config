@@ -1,6 +1,5 @@
 { pkgs, config, ... }: {
   imports = [
-    ./features/1password
     ./features/alacritty
     ./features/git
     ./features/tmux
