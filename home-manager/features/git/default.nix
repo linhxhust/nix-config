@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, lib, ... }: {
   imports = [ ../user-configurations ];
   config = {
     programs.git = {
@@ -8,7 +8,7 @@
         user.email = "linhx.hust@gmail.com";
         user.signingKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+DChIVCZ5wWSbz9/3Pi53TMOfUGYF3AkBegkP2GR+n";
-        gpg = {
+        gpg = lib.mkIf (config.userConf.gitGpgSSHSignProgram != null) {
           format = "ssh";
           ssh.program = config.userConf.gitGpgSSHSignProgram;
         };
@@ -16,7 +16,7 @@
           autocrlf = "input";
           editor = "nvim";
         };
-        commit.gpgsign = true;
+        commit.gpgsign = config.userConf.gitGpgSSHSignProgram != null;
         push.default = "current";
         pull.ff = "only";
         diff = {
