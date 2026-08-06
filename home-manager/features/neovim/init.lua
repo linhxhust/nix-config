@@ -18,7 +18,7 @@ local function setup_cmp()
     completion = {
       keyword = { range = 'full' },
       accept = { auto_brackets = { enabled = false }, },
-      menu = { auto_show = false, },
+      menu = { auto_show = true, },
       ghost_text = { enabled = true },
       documentation = {
         auto_show = true,
