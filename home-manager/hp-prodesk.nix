@@ -61,9 +61,6 @@
 
   programs.go.env.GOPATH = lib.mkForce "/home/linhnguyen/tools/go";
 
-  # 1password (op-ssh-sign) is not installed on this host, so disable commit signing.
-  programs.git.settings.commit.gpgsign = lib.mkForce false;
-
   # tailscale (client + tailscaled) is provided by the OS on this non-NixOS host;
   # skip the nixpkgs CLI to avoid client/daemon version skew.
   tailscaleOpts.installPackage = false;
