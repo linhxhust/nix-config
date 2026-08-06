@@ -103,7 +103,7 @@ local function setup_mappings()
       -- project navigation
       ['<leader>sf'] = { Snacks.picker.files, 'find files' },
       ['<leader>sg'] = { Snacks.picker.git_files, 'find git fiels' },
-      ['<leader><space>'] = { Snacks.picker.buffers, 'find buffers' },
+      ['<leader>sb'] = { Snacks.picker.buffers, 'find buffers' },
       ['<leader>ss'] = { Snacks.picker.lsp_symbols, 'LSP Symbols' },
       ['<leader>sS'] = { Snacks.picker.lsp_workspace_symbols, 'workspace symbols' },
       ['<leader>sa'] = { Snacks.picker.grep, 'Grep' },
@@ -142,7 +142,7 @@ local function setup_mappings()
         'complete file path',
       },
       ['qq'] = { '<esc>', 'normal model' },
-      ['<c-x><c-l>'] = {
+      ['<leader><space>'] = {
         function()
           local bl = require 'blink.cmp'
           if not bl.show() then
