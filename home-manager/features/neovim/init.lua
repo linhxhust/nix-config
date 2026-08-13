@@ -11,6 +11,8 @@ local function setup_cmp()
     keymap = {
       preset = 'default',
       ['<C-space>'] = {},
+      ['<Tab>'] = { 'select_and_accept', 'fallback' },
+      ['<C-y>'] = {},
     },
     sources = {
       default = { 'lsp', 'path', 'snippets' },
