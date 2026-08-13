@@ -20,6 +20,7 @@ local function setup_cmp()
     completion = {
       keyword = { range = 'full' },
       accept = { auto_brackets = { enabled = false }, },
+      list = { selection = { preselect = true, auto_insert = false } },
       menu = { auto_show = true, },
       ghost_text = { enabled = true },
       documentation = {
