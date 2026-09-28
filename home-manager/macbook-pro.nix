@@ -52,6 +52,7 @@
       swiftlint
       xcodegen
       vscode
+      google-cloud-sdk
     ];
   };
 
