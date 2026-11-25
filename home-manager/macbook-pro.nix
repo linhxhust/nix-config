@@ -62,7 +62,8 @@
   userConf = {
     terminalFontSize = 14.0;
     gitFolderConfigs = {
-      "/Users/linhnguyen/Workspace/corporate/" = "/Users/linhnguyen/Workspace/corporate/.gitconfig";
+      "/Users/linhnguyen/Workspace/apac/" = "/Users/linhnguyen/Workspace/apac/.gitconfig";
+      "/Users/linhnguyen/Workspace/usa/" = "/Users/linhnguyen/Workspace/usa/.gitconfig";
     };
     shellProgram = "${pkgs.zsh}/bin/zsh";
   };
@@ -83,8 +84,5 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-  programs.omniwm = {
-    enable = true;
   };
 }
