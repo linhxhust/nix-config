@@ -4,6 +4,7 @@
     shellAliases = {
       g = "git";
     };
+    loadSessionVariables = true;
   };
   programs.atuin = {
     enable = true;

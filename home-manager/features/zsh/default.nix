@@ -74,7 +74,7 @@
       };
     };
   };
-  programs.fzf.enable = true;
+  # programs.fzf.enable = true;
   programs.zsh = {
     enable = true;
     envExtra = ''
@@ -86,7 +86,7 @@
     '';
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" "fasd" "fzf" "direnv" ];
+      plugins = [ "git" "sudo" "fasd" "direnv" ];
     };
 
     initContent = ''
