@@ -9,6 +9,7 @@
     ./features/rust
     ./features/nushell
     ./features/user-configurations
+    ./features/omniwm
   ];
 
   nixpkgs.config = {
@@ -54,7 +55,6 @@
       vscode
       google-cloud-sdk
       opentofu
-      omniwm
     ];
   };
 
@@ -86,6 +86,4 @@
     enable = true;
     nix-direnv.enable = true;
   };
-
-  programs.omniwm.enable = true;
 }
