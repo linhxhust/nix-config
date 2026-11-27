@@ -4,6 +4,16 @@ let
   nixCatsUtils = import inputs.nixCats;
   luaPath = ./.;
 
+  # rustaceanvim's busted integration tests fail in the nix sandbox on
+  # nixpkgs 2026-11 (E95 / "Invalid 'buf'"), breaking the whole neovim build.
+  # Rebuild the plugin from the lua package with checks disabled; drop this
+  # once nixpkgs fixes the tests.
+  rustaceanvimNoCheck = pkgs: pkgs.neovimUtils.buildNeovimPlugin {
+    luaAttr = pkgs.neovim-unwrapped.lua.pkgs.rustaceanvim.overrideAttrs {
+      doCheck = false;
+    };
+  };
+
   categoryDefinitions = { pkgs, ... }: {
     lspsAndRuntimeDeps = {
       general = with pkgs; [
@@ -55,7 +65,7 @@ let
 
         nvim-lspconfig
         lspkind-nvim
-        rustaceanvim
+        (rustaceanvimNoCheck pkgs)
         crates-nvim
         treesj
 
